@@ -46,48 +46,48 @@ ENVIRONMENTS = ["Alkanes", "Alcohols", "Amines", "Nitro\nCompounds",
                 "Peroxides", "Carbonyls"]
 
 data_mace_off23 = np.array([
-    [   8.03,    7.95,    8.02,    5.16,    7.97,   -3.04],  # C-H
-    [  18.59,   15.57,   10.46,    5.01,    8.65, np.nan],  # C-C
+    [   8.03,    7.95,    8.02,    6.68,    7.97,   -3.04],  # C-H
+    [  18.59,   15.57,   10.46,    4.88,    8.65, np.nan],  # C-C
     [np.nan,  -22.99, np.nan, np.nan, np.nan, np.nan],  # C-O
     [np.nan, np.nan,    5.47, np.nan, np.nan, np.nan],  # N-H
-    [np.nan, np.nan,   11.35,   20.58, np.nan, np.nan],  # C-N
-    [np.nan, np.nan, np.nan,   -0.83, np.nan, np.nan],  # N-O
+    [np.nan, np.nan,   11.35,   20.45, np.nan, np.nan],  # C-N
+    [np.nan, np.nan, np.nan,   -0.96, np.nan, np.nan],  # N-O
     [np.nan, np.nan, np.nan, np.nan,  -33.95, np.nan],  # O-O
 ])
 data_mace_osaka24 = np.array([
-    [  -1.96,   -3.33,   -3.15,   -3.95,   -2.28,  -13.87],  # C-H
-    [   5.73,    3.53,   -0.73,   -6.34,   -0.41, np.nan],  # C-C
+    [  -1.96,   -3.33,   -3.15,   -4.22,   -2.28,  -13.87],  # C-H
+    [   5.73,    3.53,   -0.73,   -7.04,   -0.41, np.nan],  # C-C
     [np.nan,   -4.30, np.nan, np.nan, np.nan, np.nan],  # C-O
     [np.nan, np.nan,   -0.57, np.nan, np.nan, np.nan],  # N-H
-    [np.nan, np.nan,    4.44,  -12.88, np.nan, np.nan],  # C-N
-    [np.nan, np.nan, np.nan,   -5.84, np.nan, np.nan],  # N-O
+    [np.nan, np.nan,    4.44,  -13.58, np.nan, np.nan],  # C-N
+    [np.nan, np.nan, np.nan,   -6.54, np.nan, np.nan],  # N-O
     [np.nan, np.nan, np.nan, np.nan,  -14.06, np.nan],  # O-O
 ])
 data_ani_1xnr = np.array([
-    [  -8.62,   -5.14,   -5.29,  -11.70,   -5.59,   -2.00],  # C-H
-    [ -17.49,  -37.28,  -38.37,  -47.10,  -44.60, np.nan],  # C-C
+    [  -8.62,   -5.14,   -5.29,  -10.65,   -5.59,   -2.00],  # C-H
+    [ -17.49,  -37.28,  -38.37,  -45.58,  -44.60, np.nan],  # C-C
     [np.nan,  -30.51, np.nan, np.nan, np.nan, np.nan],  # C-O
     [np.nan, np.nan,  -10.67, np.nan, np.nan, np.nan],  # N-H
-    [np.nan, np.nan,  -28.50,  -72.18, np.nan, np.nan],  # C-N
-    [np.nan, np.nan, np.nan,  -19.86, np.nan, np.nan],  # N-O
-    [np.nan, np.nan, np.nan, np.nan,  -29.21, np.nan],  # O-O
+    [np.nan, np.nan,  -28.50,  -70.66, np.nan, np.nan],  # C-N
+    [np.nan, np.nan, np.nan,  -18.34, np.nan, np.nan],  # N-O
+    [np.nan, np.nan, np.nan, np.nan,  -29.20, np.nan],  # O-O
 ])
 data_mace_omol = np.array([
-    [  -4.77,   -3.70,   -3.44,   -4.43,   -3.56,   -4.81],  # C-H
-    [  -7.01,   -6.38,   -6.26,   -6.24,   -5.23, np.nan],  # C-C
+    [  -4.77,   -3.70,   -3.44,   -4.48,   -3.56,   -4.81],  # C-H
+    [  -7.01,   -6.38,   -6.26,   -6.10,   -5.23, np.nan],  # C-C
     [np.nan,   -2.87, np.nan, np.nan, np.nan, np.nan],  # C-O
     [np.nan, np.nan,   -3.63, np.nan, np.nan, np.nan],  # N-H
-    [np.nan, np.nan,   -3.34,   -4.43, np.nan, np.nan],  # C-N
-    [np.nan, np.nan, np.nan,    4.41, np.nan, np.nan],  # N-O
+    [np.nan, np.nan,   -3.34,   -4.28, np.nan, np.nan],  # C-N
+    [np.nan, np.nan, np.nan,    4.55, np.nan, np.nan],  # N-O
     [np.nan, np.nan, np.nan, np.nan,   -1.95, np.nan],  # O-O
 ])
 data_uma_s_1p1 = np.array([
-    [  -1.16,   -1.21,   -1.10,   -1.26,   -1.03,   -2.28],  # C-H
-    [  -1.11,   -2.09,   -2.25,   -2.15,   -2.13, np.nan],  # C-C
+    [  -1.16,   -1.21,   -1.10,   -1.09,   -1.03,   -2.28],  # C-H
+    [  -1.11,   -2.09,   -2.25,   -2.02,   -2.13, np.nan],  # C-C
     [np.nan,   -0.69, np.nan, np.nan, np.nan, np.nan],  # C-O
     [np.nan, np.nan,   -1.33, np.nan, np.nan, np.nan],  # N-H
-    [np.nan, np.nan,   -0.25,   -1.03, np.nan, np.nan],  # C-N
-    [np.nan, np.nan, np.nan,    0.87, np.nan, np.nan],  # N-O
+    [np.nan, np.nan,   -0.25,   -0.90, np.nan, np.nan],  # C-N
+    [np.nan, np.nan, np.nan,    1.00, np.nan, np.nan],  # N-O
     [np.nan, np.nan, np.nan, np.nan,   -1.47, np.nan],  # O-O
 ])
 

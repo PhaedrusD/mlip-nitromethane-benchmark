@@ -69,6 +69,27 @@ def pick_oh(atoms):
     return int(O[i]), int(H[j]), float(sub[i, j])
 
 
+ZNUM = {"H": 1, "C": 6, "N": 7, "O": 8}
+
+
+def pick_pair(atoms, pair):
+    """Closest pair of the two named elements in the frame, e.g. "OH" or "HH".
+    Returns (i, j, r): atom j is the one that gets moved toward atom i.
+    For "OH" this is identical to pick_oh (O fixed, H moved)."""
+    if pair == "OH":
+        return pick_oh(atoms)
+    e1, e2 = pair[0], pair[1]
+    sym = np.array(atoms.get_chemical_symbols())
+    D = atoms.get_all_distances(mic=True)
+    A = np.where(sym == e1)[0]
+    B = np.where(sym == e2)[0]
+    sub = D[np.ix_(A, B)].copy()
+    if e1 == e2:
+        np.fill_diagonal(sub, np.inf)
+    i, j = np.unravel_index(np.argmin(sub), sub.shape)
+    return int(A[i]), int(B[j]), float(sub[i, j])
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -79,13 +100,23 @@ def main():
                     help="frame index (2000 = 50 ps, well into steady state)")
     ap.add_argument("--rmin", type=float, default=0.05)
     ap.add_argument("--n", type=int, default=40)
+    ap.add_argument("--pair", default="OH", choices=["OH", "HH"],
+                    help="which contact to compress: the closest O-H pair "
+                         "(default, Figure 5) or the closest H-H pair. HH "
+                         "writes to <outdir>_hh unless --outdir is given.")
+    ap.add_argument("--dr", type=float, default=None,
+                    help="point spacing in A; overrides --n (HH default 0.02)")
     ap.add_argument("--osaka-path"); ap.add_argument("--ani-info")
     ap.add_argument("--uma-path"); ap.add_argument("--omol-path")
     ap.add_argument("--device", default="cuda")
-    ap.add_argument("--outdir", default="MLIP_paper/short_range_floor")
+    ap.add_argument("--outdir", default=None)
     ap.add_argument("--merge", action="store_true",
                     help="merge per-model CSVs in --outdir into one table + figure")
     a = ap.parse_args()
+    if a.outdir is None:
+        a.outdir = "MLIP_paper/short_range_floor" + ("_hh" if a.pair == "HH" else "")
+    if a.pair == "HH" and a.dr is None:
+        a.dr = 0.02
     os.makedirs(a.outdir, exist_ok=True)
 
     if a.merge:
@@ -96,9 +127,12 @@ def main():
     from ase.io.trajectory import Trajectory
     from run_reactive_md import setup_calculator
     atoms = Trajectory(a.frame)[a.index].copy()
-    iO, iH, r0 = pick_oh(atoms)
-    print(f"  frame {a.index} of {a.frame}: compressing O{iO}-H{iH}, "
-          f"starting at {r0:.3f} A")
+    iO, iH, r0 = pick_pair(atoms, a.pair)
+    zz = ZNUM[a.pair[0]] * ZNUM[a.pair[1]]
+    if a.dr:
+        a.n = int(round((r0 - a.rmin) / a.dr)) + 1
+    print(f"  frame {a.index} of {a.frame}: compressing {a.pair[0]}{iO}-"
+          f"{a.pair[1]}{iH}, starting at {r0:.3f} A, {a.n} points")
 
     calc = setup_calculator(a.model, osaka_path=a.osaka_path, ani_info=a.ani_info,
                             uma_path=a.uma_path, omol_path=a.omol_path,
@@ -122,7 +156,7 @@ def main():
             ok = np.isfinite(E)
         except Exception as exc:          # a model that NaNs here is a result too
             dE, ok = float("nan"), False
-        coul = COULOMB_EV_A * 8 * 1 / r * KCAL
+        coul = COULOMB_EV_A * zz / r * KCAL
         rows.append((r, dE, coul, ok))
         print(f"    r = {r:5.3f} A   dE = {dE:+14.1f} kcal/mol   "
               f"bare Coulomb {coul:+12.1f}" + ("" if ok else "   <-- not finite"))

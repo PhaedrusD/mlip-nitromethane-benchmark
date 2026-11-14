@@ -163,7 +163,7 @@ def main():
     ax1.set_yticks([s[0] for s in strips])
     ax1.set_yticklabels([s[4] for s in strips], fontsize=9.5)
     ax1.set_ylim(0.05, 3.55)
-    ax1.set_xlabel("signed error vs CCSD(T)  (kcal mol$^{-1}$)", fontsize=10.5)
+    ax1.set_xlabel("signed error vs DLPNO-CCSD(T)  (kcal mol$^{-1}$)", fontsize=10.5)
     # >>> NO PANEL TITLES BY DEFAULT: the caption carries them. --annotate for slides.
     if a.annotate:
         ax1.set_title("(a)  radical pairs pulled onto zero", loc="left",
