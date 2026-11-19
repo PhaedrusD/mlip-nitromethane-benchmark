@@ -10,7 +10,7 @@ MACE-Osaka24, MACE-OMol-0, UMA-S-1P1, ANI-1xnr) and a fine-tuned ANI-1xnr
 
 The layout mirrors the working directory used for the paper, so the scripts run
 unmodified from the repository root. Molecular dynamics trajectories are too
-large for GitHub and are archived on Zenodo: [Zenodo DOI].
+large for GitHub and are archived on Zenodo: https://doi.org/10.5281/zenodo.24229680.
 
 ## Requirements
 
@@ -21,6 +21,9 @@ Two separate Python environments are needed, because the MACE and fairchem
 |---|---|---|
 | `mace-dox` | MACE-OFF23, MACE-Osaka24, MACE-OMol-0, ANI-1xnr | ASE 3.29.0, mace-torch 0.3.16, torchani 2.8.2, PyTorch 2.8.0 |
 | `uma` | UMA-S-1P1 | ASE 3.29.0, fairchem-core 2.21.0, PyTorch 2.8.0 |
+
+The model curves of Figure 1 were computed by J. Dunal in a separate environment
+(ASE 3.28.0, mace-torch 0.3.16, fairchem-core 2.14.0).
 
 Reference calculations used ORCA 6.1.1. Model weights are not redistributed
 here, except the fine-tuned ANI-1xnr-Mrr ensemble. Obtain the others from their
@@ -45,6 +48,8 @@ original sources (see the Supporting Information, Table S1).
 | `ablate_embedding.py`, `ablate_subset.py`, `falsify_label.py` | Ablation, control and falsification tests |
 | `nve_timestep_test.py` | Time-step test for the isolated molecule |
 | `MLIP_paper/*.csv` | Tabulated results read by the plotting scripts |
+| `reference_han2011.csv` | ReaxFF populations digitised from Han et al. (2011), used for Table 2 |
+| `plot_toc.py`, `render_molecule.py` | Table of Contents graphic |
 
 ## Figures
 
